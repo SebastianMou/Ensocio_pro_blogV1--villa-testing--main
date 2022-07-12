@@ -19,7 +19,9 @@ def home(request):
     return render(request, 'store/home.html', {'products':products, 'productsss':productsss ,'ferwidget':ferwidget, 'comunicationslinks':comunicationslinks})
 
 def about(request):
-    return render(request, 'store/about.html')
+    ferwidget = FerWidget.objects.all()
+    comunicationslinks = get_object_or_404(ComunicationsLinks)
+    return render(request, 'store/about.html', {'ferwidget':ferwidget, 'comunicationslinks':comunicationslinks})
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, in_stock=True)
@@ -30,4 +32,6 @@ def product_detail(request, slug):
 def category_list(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     products = Product.objects.filter(category=category)
-    return render(request, 'store/products/category.html', {'category': category, 'products': products})
+    ferwidget = FerWidget.objects.all()
+    comunicationslinks = get_object_or_404(ComunicationsLinks)
+    return render(request, 'store/products/category.html', {'category': category, 'products': products, 'ferwidget':ferwidget, 'comunicationslinks':comunicationslinks})

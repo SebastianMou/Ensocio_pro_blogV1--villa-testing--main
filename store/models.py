@@ -27,7 +27,7 @@ class Product(models.Model):
     video = models.URLField(max_length=300, default='https://www.youtube.com/embed/')
     image = models.ImageField(upload_to='images/', default='images/default.png')
     slug = models.SlugField(max_length=255)
-    price = models.DecimalField(max_digits=4, decimal_places=2)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
     in_stock = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -54,5 +54,6 @@ class FerWidget(models.Model):
 class ComunicationsLinks(models.Model):
     facebook = models.URLField(max_length=255, null=True)
     instagram = models.URLField(max_length=255, null=True)
+    pinterest = models.URLField(max_length=255, null=True)
     whatsapp = models.URLField(max_length=255, null=True)
     blog = models.URLField(max_length=255, null=True)
