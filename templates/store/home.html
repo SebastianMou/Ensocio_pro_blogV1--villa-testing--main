@@ -1,0 +1,44 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row align-items-center">
+    {% for product in productsss %}
+      <div class="col-lg-6">
+        <div class="card mb-4">
+          <a href="#!"><img class="card-img-top" src="{{ product.image.url }}" alt="..." /></a>
+            <div class="card-body">
+              <div class="small text-muted">{{ product.created }}</div>
+              <h2 class="card-title h4">{{ product.title }}</h2>
+              <p class="card-text">{{ product.description_title|slice:"90" }}...</p>
+              <a class="btn btn-primary" href="{{ product.get_absolute_url }}">leer mas →</a>
+            </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+página {{ productsss.number }} / {{ productsss.paginator.num_pages }}
+<!-- Pagination-->
+<nav aria-label="Pagination">
+  <hr class="my-0" />
+  <ul class="pagination justify-content-center my-4">
+      <!--<li class="page-item"><a class="page-link" href="?page=1">&laquo first</a></li>-->
+      {% if productsss.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ productsss.previous_page_number }}">previous</a></li>
+      {% endif %}
+
+      {% for num_page in productsss.paginator.page_range %}
+        {% if productsss.number == num_page %}
+          <li class="page-item active"><a class="page-link" href="?page={{ num_page }}">{{ num_page }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ num_page }}">{{ num_page }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if productsss.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ productsss.next_page_number }}">next</a></li>
+      {% endif %}
+  </ul>
+  <br>
+</nav>
+{% endblock content %}

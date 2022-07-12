@@ -1,0 +1,25 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<h1>Home</h1>
+<a href="{% url 'store:about' %}">about</a>
+
+<div class="container">
+  <div class="row">
+    {% for product in products %}
+      <div class="col">
+        <div class="card">
+          <img style="width: 50%; height: 50%;" src="{{ product.image.url }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <h6>{{ product.category }}</h6>
+            <p class="card-text">{{ product.description|slice:":9" }}.</p>
+            <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Go somewhere</a>
+            <small>{{ product.created }}</small>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
